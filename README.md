@@ -12,7 +12,7 @@ One colored dot per session, always visible:
 
 Click a session in the dropdown to jump straight to its window.
 
-![Menu-bar mockup](docs/mockup.svg)
+![Demo: the menu-bar indicator updating live, opening the dropdown, and focusing a session](docs/claude-status-demo.gif)
 
 ## How it works
 
