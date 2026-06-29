@@ -39,6 +39,7 @@ bash claude-status-monitor/install.sh
 - **Working sessions** (🔴/🟠) are always shown.
 - **Finished sessions** (🟢) fade out after 5 minutes — except the most recent one, so the bar is never empty.
 - Closing a session removes it immediately; an abandoned session is cleaned up after 6h.
+- **Clear manually**: each row has a "Remove from list" action, and "Clear finished" drops all green sessions at once — no need to wait for the 5-minute timer.
 - Session names match the titles shown in the desktop app's sidebar (terminal sessions fall back to the project folder).
 
 Tunable at the top of `claude_status.2s.py`: `DONE_KEEP_SECS`, `STALE_RUNNING_SECS`, `PRUNE_SECS`.

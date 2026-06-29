@@ -14,6 +14,7 @@ import glob
 
 STATUS_DIR = os.path.expanduser("~/.claude/status")
 OPENER = os.path.expanduser("~/.claude/status-monitor/open-session.sh")
+DISMISS = os.path.expanduser("~/.claude/status-monitor/dismiss.sh")
 # Desktop app stores each session's sidebar title here, keyed by cliSessionId.
 SESSIONS_DIR = os.path.expanduser(
     "~/Library/Application Support/Claude/claude-code-sessions")
@@ -153,13 +154,17 @@ def main():
             sid = s.get("session_id", "")
             # clicking focuses the session's desktop window
             print(f"{line} | bash=\"{OPENER}\" param1=\"{sid}\" terminal=false refresh=true")
-            # subtitle: project folder + path
+            # submenu (hover): project path + a manual "remove now" action
             sub = s.get("project", "") or s.get("cwd", "")
             if sub:
                 print(f"-- {sub} | color=#888888 font=Menlo size=11")
+            print(f"-- ✕ Remove from list | bash=\"{DISMISS}\" param1=\"{sid}\" terminal=false refresh=true")
 
     print("---")
-    print(f"Refresh | refresh=true")
+    done_n = sum(1 for s in sessions if s.get("status") == "done")
+    if done_n:
+        print(f"Clear finished ({done_n}) | bash=\"{DISMISS}\" param1=\"--done\" terminal=false refresh=true")
+    print("Refresh | refresh=true")
 
 
 if __name__ == "__main__":
