@@ -34,10 +34,12 @@ bash claude-status-monitor/install.sh
 
 `install.sh` is self-contained and idempotent: it links the scripts, **merges the status hooks into your `settings.json`** (preserving anything already there, with a backup), installs SwiftBar, and launches it. Open a Claude Code session and look at the top-right of your menu bar.
 
+**Recommended:** grant SwiftBar Accessibility permission (System Settings → Privacy & Security → Accessibility → add SwiftBar) — the installer opens this pane for you. It lets a click jump to the *exact* session window; without it, a click just brings the app to the front.
+
 ## Behavior
 
 - **Working sessions** (🔴/🟠) are always shown.
-- **Finished sessions** (🟢) fade out after 5 minutes — except the most recent one, so the bar is never empty.
+- **Finished sessions** (🟢) are removed from the list 5 minutes after they finish.
 - Closing a session removes it immediately; an abandoned session is cleaned up after 6h.
 - **Clear manually**: each row has a "Remove from list" action, and "Clear finished" drops all green sessions at once — no need to wait for the 5-minute timer.
 - Session names match the titles shown in the desktop app's sidebar (terminal sessions fall back to the project folder).
@@ -47,7 +49,7 @@ Tunable at the top of `claude_status.2s.py`: `DONE_KEEP_SECS`, `STALE_RUNNING_SE
 ## Limitations
 
 - **macOS only** (the display layer is SwiftBar).
-- **Click-to-focus**: exact-window on the desktop app (each session is its own app instance); in a terminal it brings the terminal app to the front, not the exact tab.
+- **Click-to-focus** needs SwiftBar's Accessibility permission (sessions are separate windows of one app, so focusing the exact one is done by matching the window title). Without the permission — or in a terminal — a click just brings the app to the front.
 - **macOS permission dialogs** (e.g. "allow access to Desktop") stay 🔴 — they're an OS dialog, not a Claude Code event, so no hook fires.
 - claude.ai chat / web is out of scope (no hooks).
 

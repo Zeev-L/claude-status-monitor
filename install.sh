@@ -44,6 +44,13 @@ defaults write com.ameba.SwiftBar PluginDirectory "$REPO_DIR/swiftbar-plugins" 2
 defaults write com.ameba.SwiftBar SwiftBarLaunchAtLogin -bool true 2>/dev/null || true
 open -a SwiftBar 2>/dev/null || true
 
+echo "==> 6. (recommended) Grant SwiftBar Accessibility permission"
+echo "    Needed so clicking a session jumps to its EXACT window (sessions are"
+echo "    separate windows of one app). Without it, clicking just brings the app"
+echo "    to the front. Opening the settings pane now — add SwiftBar and switch it on:"
+echo "      System Settings → Privacy & Security → Accessibility → + → SwiftBar"
+open "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility" 2>/dev/null || true
+
 echo
 echo "Done. Open a Claude Code session and look at the menu bar (top-right)."
 echo "If dots don't appear, quit and reopen SwiftBar."

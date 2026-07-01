@@ -58,8 +58,7 @@ STYLE = {
 
 STALE_RUNNING_SECS = 600        # mark a "running" session stale after 10 min idle
 PRUNE_SECS = 6 * 3600           # delete orphan files older than 6 h
-DONE_KEEP_SECS = 300            # hide a finished (green) session after 5 min...
-                                # ...except the single most-recently-finished one
+DONE_KEEP_SECS = 300            # auto-remove a finished (green) session 5 min after it finished
 
 
 def human_age(secs):
@@ -95,19 +94,12 @@ def load_sessions():
 
 
 def filter_visible(sessions):
-    """Always show active (non-done) sessions. Hide a finished (green) session
-    once it's older than DONE_KEEP_SECS — but always keep the single most
-    recently finished one, so the indicator is never emptied by completions.
-    Display-only: files stay on disk, so a green session that gets a new prompt
+    """Always show active (non-done) sessions. A finished (green) session is
+    auto-removed from the list once it's been done for DONE_KEEP_SECS (5 min).
+    Display-only: the file stays on disk, so if that session gets a new prompt it
     flips back to running and reappears."""
-    done = [s for s in sessions if s.get("status") == "done"]
-    visible = [s for s in sessions if s.get("status") != "done"]
-    if done:
-        latest = min(done, key=lambda s: s.get("_age", 0))  # smallest age = newest
-        for s in done:
-            if s is latest or s.get("_age", 0) < DONE_KEEP_SECS:
-                visible.append(s)
-    return visible
+    return [s for s in sessions
+            if not (s.get("status") == "done" and s.get("_age", 0) >= DONE_KEEP_SECS)]
 
 
 def main():
