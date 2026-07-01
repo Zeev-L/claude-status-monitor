@@ -34,7 +34,7 @@ bash claude-status-monitor/install.sh
 
 `install.sh` is self-contained and idempotent: it links the scripts, **merges the status hooks into your `settings.json`** (preserving anything already there, with a backup), installs SwiftBar, and launches it. Open a Claude Code session and look at the top-right of your menu bar.
 
-**Recommended:** grant SwiftBar Accessibility permission (System Settings → Privacy & Security → Accessibility → add SwiftBar) — the installer opens this pane for you. It lets a click jump to the *exact* session window; without it, a click just brings the app to the front.
+**Recommended:** grant SwiftBar Accessibility permission (System Settings → Privacy & Security → Accessibility → add SwiftBar) — the installer opens this pane for you. **After enabling it, quit and reopen SwiftBar so it takes effect.** This lets a click jump to the *exact* session window; without it, a click just brings the app to the front.
 
 ## Behavior
 

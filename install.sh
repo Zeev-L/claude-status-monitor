@@ -49,6 +49,7 @@ echo "    Needed so clicking a session jumps to its EXACT window (sessions are"
 echo "    separate windows of one app). Without it, clicking just brings the app"
 echo "    to the front. Opening the settings pane now — add SwiftBar and switch it on:"
 echo "      System Settings → Privacy & Security → Accessibility → + → SwiftBar"
+echo "    IMPORTANT: after enabling it, QUIT and reopen SwiftBar so it takes effect."
 open "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility" 2>/dev/null || true
 
 echo
